@@ -1,7 +1,7 @@
 function bids_export_wrapper(task, ses)
     % Export joint EEG, behavior and Eye-tracking data to BIDS.
     %  INPUT :
-    %           task - char : name of the task that should be exported
+    %           task - char : name of the task that should be exported 
     %           ses - numeric array : integer identifier(s) of the session(s) you want to export.
     %
     % Wraps EEG-BIDS export function based on three key files : participants.csv, recordings.csv and tasks.json, and a source_data folder. See readme for more informations.
@@ -9,7 +9,7 @@ function bids_export_wrapper(task, ses)
     % Adapted from Arnaud Delorme - May 2022 bids_export_example4 and December 2023 bids_export_eye_tracking_example5
     % Lea Zamora March 2026
 
-    % TODO: Handle >1 behav files
+    % TODO: Handle >1 behav files ; handle eye data
 
     % Read tasks.json
     json = jsondecode(fileread('tasks.json'));
@@ -178,6 +178,35 @@ function bids_export_wrapper(task, ses)
         'deleteExportDir', 'off', ...
         'forcesession', 'on', ...
         'writePInfoOnly', 'off');
+
+    %% Add behavior folder 
+    % % -----------------------------------   
+    behav_rows = ~cellfun(@isempty, t.opt_file_behavior);
+    tb = t(behav_rows,:);
+
+    for i = 1:height(tb)
+        % path in source_data
+        op = tb.opt_file_behavior{i};
+        if exist(op, 'file') == 2   
+            [~,~,ext] = fileparts(op);
+            tsk = tb.task{i};
+            sss = tb.session(i);
+            rn  = tb.run(i);
+            s   = tb.participant_id{i};
+            % target folder path
+            np = fullfile(targetFolder, sprintf('sub-%s', s), sprintf('ses-%d', sss), 'beh');
+            % BIDS file name
+            name = sprintf('sub-%s_ses-%d_task-%s_run-%d_beh%s', s, sss, tsk, rn, ext);
+            % copy the file
+            if ~exist(np, 'dir')
+                mkdir(np);
+            end
+            fp = fullfile(np, name);
+            copyfile(op, fp);
+        else
+            warning('Behavioral file %s does not exist', op)
+        end
+    end
 
     %% copy stimuli and source data folders
     % % -----------------------------------
