@@ -1,0 +1,11 @@
+participant_id;task;session;run;date_mm-yyyy;file_eeg;opt_file_behavior;opt_file_eye;opt_notes;sub_sex;sub_age;sub_handedness;opt_sub_group;opt_sub_corrected_vision
+10310;EC;1;1;08-2026;any_name_you_used.set;any_name_you_used.csv;any_name_you_used.txt;;F;22.5;R;c;N
+10311;EC;1;1;08-2026;sub-010311_EC.set;;;behav and eye files lost;M;52.5;L;c;Y
+10314;EC;1;1;08-2026;sub-010314_EC.set;c.csv;3.txt;didn’t understand the task. Delete?;M;27.5;R;p;N
+10310;EC;2;1;12-2099;ses2run1sub-010310_EC.set;d.csv;4.txt;test\ntest*’`”/\;F;22.5;R;c;N
+10310;EC;2;2;12-2099;ses2run2sub-010310_EC.set;;;behav and eye files lost;F;22.5;R;c;N
+10310;EO;1;1;08-2026;sub-010310_EC.set;a.csv;1.txt;testing several tasks;F;22.5;R;c;N
+10311;EO;1;1;08-2026;sub-010311_EC.set;;;testing several tasks;M;52.5;L;c;Y
+10314;EO;1;1;08-2026;sub-010314_EC.set;c.csv;3.txt;testing several tasks;M;27.5;R;p;N
+10310;EO;2;1;12-2099;ses2run1sub-010310_EC.set;d.csv;4.txt;testing several tasks;F;22.5;R;c;N
+10310;EO;2;2;12-2099;ses2run2sub-010310_EC.set;;;testing several tasks;F;22.5;R;c;N
