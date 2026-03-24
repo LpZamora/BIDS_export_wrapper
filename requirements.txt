@@ -1,0 +1,8 @@
+GAZEPOINT % for eye-tracking data
+
+EEGLAB with plugins:
+- EEG-BIDS
+- Biosig
+- SMI % for eye-tracking data
+
+Fieldtrip (EEGLAB calls tokenize.m)

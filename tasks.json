@@ -1,0 +1,149 @@
+{
+  "comment2": "-------- Folder where you want to export the BIDS data",
+  "targetFolder": "BIDS_export_toyset",
+
+    "comment3": "-------- Does your data contain a 'stimuli' folder that you want to export as well to the BIDS folder (unquoted true/false)",
+  "stimuli_folder": false,
+
+  "comment4": "-------- % Do you want to copy the source_data to the BIDS folder as well (unquoted true/false)",
+  "copy_sourcedata": true,
+
+  "comment5": "________________________________________________ % INFORMATIONS ABOUT participants.csv ",
+  "pInfoDesc": {
+    "comment61": "-------- % For each column in *participants.csv*, you need to create a field in pInfoDesc (so here you will edit values as usual, but also some fields)",
+    "comment62": "-------- % Caution: field names can not start with a number",
+
+    "comment63": "-------- % The first level corresponds to the exact column name in participants.csv:",
+    "comment64": "-------- % Do not edit participant_id it is a mandatory BIDS column",
+    "participant_id": {
+      "LongName": "Participant identifier",
+      "Description": "Unique participant identifier"
+    },
+
+    "comment65": "-------- % Now we do the same for the other columns in participants.csv",
+    "comment66": "-------- % You can delete or add the columns you wish provided you keep participants.csv and the description here consistent",
+
+    "comment631": "-------- % Again the column name at the first level",
+    "sub_sex": {
+
+      "comment7": "-------- % The second level contains *Description*, optionnally *Levels*, *Units*, *LongName*:",
+      "Description": "Biological sex of the participant",
+      "Levels": {
+        "comment8": "-------- % *Levels* should contain fields named after each modality in the column. E.g here the sub_sex column from participants.csv contains two modalities *M* and *F*",
+        "M": "male",
+        "F": "female"
+      }
+    },
+
+    "opt_sub_group": {
+      "Description": "Experimental group of the participant",
+      "Levels": {
+        "c": "control group",
+        "p": "clinical group"
+      }
+    },
+
+    "sub_age": {
+      "Description": "Age of the participant at first session",
+      "Units": "years"
+    },
+
+    "sub_handedness": {
+      "Description": "Manual laterality of the participant",
+      "Levels": {
+        "R": "right-handed",
+        "L": "left-handed",
+        "A": "ambidextrous"
+      }
+    },
+
+   "opt_sub_corrected_vision": {
+      "Description": "Vision of the participant",
+      "Levels": {
+        "N": "normal vision without correction",
+        "Y": "normal vision with correction"
+      }
+    }
+  },
+
+
+  "comment9": "_______________________________________________ % GENERAL INFORMATIONS ABOUT THE DATASET",
+  "generalInfo": {
+    "Name": "Toyset",
+    "ReferencesAndLinks": ["No bibliographic reference other than the DOI for this dataset"],
+    "BIDSVersion": "v1.2.1",
+    "License": "",
+    "Authors": [
+      "Marge",
+      "Lisa"
+    ]
+  },
+  "README": "Toyset\n\nThis dataset...description of the experimental design",
+
+
+  "comment90": "______________________________________________ % TASK SPECIFIC INFORMATIONS",
+
+  "comment91": "-------- % The first level is composed of a field per task in your data",
+  "comment92": "-------- % It should be named *task+name-of-the-task*, e.g taskEC",
+  "taskEC": {
+
+    "tInfo": {
+      "comment93": "-------- % PowerLineFrequency expects unquoted integers (Hz)",
+      "PowerLineFrequency": 50,
+      "CapManufacturer": "n/a",
+      "RecordingType": "continuous",
+      "ManufacturersModelName": "n/a",
+      "SoftwareFilters": "n/a",
+      "Instructions": "n/a",
+      "InstitutionAddress": "n/a",
+      "InstitutionName": "n/a",
+      "InstitutionalDepartmentName": "n/a"
+    },
+
+    "eInfoDesc": {
+      "onset": {
+        "Description": "Event onset",
+        "Units": "second"
+      },
+
+      "comment94": "-------- % Now we describe all EEG triggers",
+      "value": {
+        "Description": "Trigger codes from EEG system",
+        "Levels": {
+          "comment95": "-------- % Create a field per EEG trigger. It should be named *x+trigger value*. E.g if the triggers are 11,21,31,41,99",
+          "x4": "Start of trial",
+          "x3": "Stimulus onset"
+        }
+      }
+    }
+  },
+
+  "comment95": "-------- % Now repeat for all other tasks. In our example there is only one more task, eyes open resting state (EO)",
+  "taskEO": {
+    "tInfo": {
+      "PowerLineFrequency": 50,
+      "CapManufacturer": "n/a",
+      "RecordingType": "continuous",
+      "ManufacturersModelName": "n/a",
+      "SoftwareFilters": "n/a",
+      "Instructions": "n/a",
+      "InstitutionAddress": "n/a",
+      "InstitutionName": "n/a",
+      "InstitutionalDepartmentName": "n/a"
+    },
+    
+    "eInfoDesc": {
+      "onset": {
+        "Description": "Event onset",
+        "Units": "second"
+      },
+      "value": {
+        "Description": "Trigger codes from EEG system",
+        "Levels": {
+          "x4": "Start of trial",
+          "x3": "Stimulus onset"
+        }
+      }
+    }
+  }
+}
