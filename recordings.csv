@@ -1,11 +1,11 @@
 participant_id;task;session;run;file_eeg;opt_file_behavior;opt_file_eye;opt_notes
-10310;EC;1;1;any_name_you_used.set;any_name_you_used.csv;any_name_you_used.txt;
+10310;EC;1;1;any_name_you_used.set;any_name_you_used.tsv;any_name_you_used.txt;
 10311;EC;1;1;sub-010311_EC.set;;;behav and eye files lost
-10314;EC;1;1;sub-010314_EC.set;c.csv;3.txt;didn’t understand the task. Delete?
-10310;EC;2;1;ses2run1sub-010310_EC.set;d.csv;4.txt;test\ntest*’`”/\
+10314;EC;1;1;sub-010314_EC.set;c.tsv;3.txt;didn’t understand the task. Delete?
+10310;EC;2;1;ses2run1sub-010310_EC.set;d.tsv;4.txt;test\ntest*’`”/\
 10310;EC;2;2;ses2run2sub-010310_EC.set;;;behav and eye files lost
-10310;EO;1;1;sub-010310_EC.set;a.csv;1.txt;testing several tasks
+10310;EO;1;1;sub-010310_EC.set;a.tsv;1.txt;testing several tasks
 10311;EO;1;1;sub-010311_EC.set;;;testing several tasks
-10314;EO;1;1;sub-010314_EC.set;c.csv;3.txt;testing several tasks
-10310;EO;2;1;ses2run1sub-010310_EC.set;d.csv;4.txt;testing several tasks
+10314;EO;1;1;sub-010314_EC.set;c.tsv;3.txt;testing several tasks
+10310;EO;2;1;ses2run1sub-010310_EC.set;d.tsv;4.txt;testing several tasks
 10310;EO;2;2;ses2run2sub-010310_EC.set;;;testing several tasks
