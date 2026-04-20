@@ -1,4 +1,4 @@
-participant_id;sub_sex;sub_age;sub_handedness;opt_sub_group;opt_sub_corrected_vision
+participant_id;sex;age;handedness;group;corrected_vision
 10310;F;22.5;R;c;N
 10311;M;52.5;L;c;Y
 10314;M;27.5;R;p;N
