@@ -94,6 +94,7 @@
     "tInfo": {
       "comment93": "-------- % PowerLineFrequency expects unquoted integers (Hz)",
       "PowerLineFrequency": 50,
+      "TaskName":"EC",
       "CapManufacturer": "n/a",
       "RecordingType": "continuous",
       "ManufacturersModelName": "n/a",
@@ -127,6 +128,7 @@
   "taskEO": {
     "tInfo": {
       "PowerLineFrequency": 50,
+      "TaskName":"EO",
       "CapManufacturer": "n/a",
       "RecordingType": "continuous",
       "ManufacturersModelName": "n/a",
