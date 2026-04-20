@@ -9,11 +9,11 @@ function bids_export_wrapper(task, ses)
     % Adapted from Arnaud Delorme - May 2022 bids_export_example4 and December 2023 bids_export_eye_tracking_example5
     % Lea Zamora March 2026
 
-    % TODO: Handle >1 behav files ; handle eye data
+    % TODO: Handle eye data
 
     % Read tasks.json
     json = jsondecode(fileread('tasks.json'));
-    json = removeCommentFields(json);
+    json = rm_comments_util(json);
     targetFolder = json.targetFolder;
     stimuli_folder = json.stimuli_folder;
     copy_sourcedata = json.copy_sourcedata;
@@ -163,6 +163,7 @@ function bids_export_wrapper(task, ses)
 
     bids_export(data, ...
         'targetdir', targetFolder, ...
+        'taskName', task, ...
         'gInfo', generalInfo, ...
         'pInfo', pInfo, ...
         'pInfoDesc', pInfoDesc, ...
@@ -207,6 +208,70 @@ function bids_export_wrapper(task, ses)
             warning('Behavioral file %s does not exist', op)
         end
     end
+
+    %% Add phenotype folder 
+    % % -----------------------------------  
+    if json.phenotype_folder
+        pheno_csv = 'phenotypes.csv';
+        pPhenoDesc = json.pPhenoDesc ;
+        opts = detectImportOptions(pheno_csv);
+        opts = setvartype(opts, 'participant_id', 'string');
+        pheno_i = readtable(pheno_csv, opts);
+
+        rows = ismember(pheno_i.session, ses) ;
+        pheno_i = pheno_i(rows,:);
+
+
+        % List columns linking to measurement files
+        all_phe_cols = pheno_i.Properties.VariableNames;
+        exclude_cols = {'session', 'run', 'participant_id'};
+        keep_cols = ~ismember(all_phe_cols, exclude_cols);
+        cols = all_phe_cols(keep_cols);
+
+        % Init structure for json infos
+        pPhenoDesc_clean = struct();
+
+        for column = 1:numel(cols)
+            col = string(cols(column));
+            pheno_rows = ~cellfun(@isempty, pheno_i.(col));
+            tb = pheno_i(pheno_rows,:);
+            for i = 1:height(tb)
+                % path in source_data
+                op = tb.(col){i};
+                op = fullfile('source_data', 'phenotype', op);
+                if exist(op, 'file') == 2   
+                    [~,~,ext] = fileparts(op);
+                    tsk = col;
+                    sss = tb.session(i);
+                    rn  = tb.run(i);
+                    s   = tb.participant_id{i};
+                    % target folder path
+                    np = fullfile(targetFolder, 'phenotype');
+                    % BIDS file name
+                    name = sprintf('sub-%s_ses-%d_task-%s_run-%d%s', s, sss, tsk, rn, ext);
+                    % copy the file
+                    if ~exist(np, 'dir')
+                        mkdir(np);
+                    end
+                    fp = fullfile(np, name);
+                    copyfile(op, fp);
+                else
+                    warning('Phenotype file %s does not exist', op)
+                end
+            end
+            pPhenoDesc_clean.(col) = pPhenoDesc.(col);
+        end
+    end
+
+    % Add json file with infos
+    json_str = jsonencode(pPhenoDesc_clean, 'PrettyPrint', true);
+    out_json = fullfile(targetFolder, 'phenotype', 'phenotypes_info.json');
+    fid = fopen(out_json, 'w');
+    if fid == -1
+        error('Cannot open file %s for writing', out_json);
+    end
+    fwrite(fid, json_str, 'char');
+    fclose(fid);
 
     %% copy stimuli and source data folders
     % % -----------------------------------

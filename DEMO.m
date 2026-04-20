@@ -1,4 +1,4 @@
-% Onceyour data is properly organized in the source data folder, and participants.csv, recordings.csv and tasks.json are filled
+% Once your data is properly organized in the source data folder, and participants.csv, recordings.csv and tasks.json are filled
 % (for detailed information, please refer to the readme file), you can use this wrapper to export your data to BIDS.
 
 % Make sure that your current working directory is the folder containing this script

@@ -2,8 +2,12 @@
   "comment2": "-------- Folder where you want to export the BIDS data",
   "targetFolder": "BIDS_export_toyset",
 
-    "comment3": "-------- Does your data contain a 'stimuli' folder that you want to export as well to the BIDS folder (unquoted true/false)",
-  "stimuli_folder": false,
+  "comment3": "-------- Does your data contain a 'phenotype' folder that you want to export as well to the BIDS folder (unquoted true/false)",
+  "phenotype_folder": true,
+
+  "comment000": "-------- Does your data contain a 'stimuli' folder that you want to export as well to the BIDS folder (unquoted true/false)",
+  "stimuli_folder": true,
+
 
   "comment4": "-------- % Do you want to copy the source_data to the BIDS folder as well (unquoted true/false)",
   "copy_sourcedata": true,
@@ -24,7 +28,7 @@
     "comment66": "-------- % You can delete or add the columns you wish provided you keep participants.csv and the description here consistent",
 
     "comment631": "-------- % Again the column name at the first level",
-    "sub_sex": {
+    "sex": {
 
       "comment7": "-------- % The second level contains *Description*, optionnally *Levels*, *Units*, *LongName*:",
       "Description": "Biological sex of the participant",
@@ -35,7 +39,7 @@
       }
     },
 
-    "opt_sub_group": {
+    "group": {
       "Description": "Experimental group of the participant",
       "Levels": {
         "c": "control group",
@@ -43,12 +47,12 @@
       }
     },
 
-    "sub_age": {
+    "age": {
       "Description": "Age of the participant at first session",
       "Units": "years"
     },
 
-    "sub_handedness": {
+    "handedness": {
       "Description": "Manual laterality of the participant",
       "Levels": {
         "R": "right-handed",
@@ -57,7 +61,7 @@
       }
     },
 
-   "opt_sub_corrected_vision": {
+   "corrected_vision": {
       "Description": "Vision of the participant",
       "Levels": {
         "N": "normal vision without correction",
@@ -110,9 +114,10 @@
       "value": {
         "Description": "Trigger codes from EEG system",
         "Levels": {
-          "comment95": "-------- % Create a field per EEG trigger. It should be named *x+trigger value*. E.g if the triggers are 11,21,31,41,99",
-          "x4": "Start of trial",
-          "x3": "Stimulus onset"
+          "comment95": "-------- % Create a field per EEG trigger. It should be named *x+trigger value*. E.g if the triggers are 32766,4,3",
+          "x32766": "Start of recording",
+          "x4": "Start of block",
+          "x3": "An interesting event"
         }
       }
     }
@@ -140,10 +145,52 @@
       "value": {
         "Description": "Trigger codes from EEG system",
         "Levels": {
-          "x4": "Start of trial",
-          "x3": "Stimulus onset"
+          "x32766": "Start of recording",
+          "x4": "Start of block",
+          "x3": "An interesting event"
         }
       }
+    }
+  },
+
+"comment099": "______________________________________________ % OPTIONAL information about phenotypes.csv",
+"comment0000799": "__________________________________________ % Here you describe the phenotypic measures made, e.g. validated scales",
+"comment0991": "______________________________________________% What is below is ignored if phenotype_folder = false",
+"pPhenoDesc": {
+    "comment6881": "-------- % For each column in *phenotypes.csv*, you need to create a field in pPhenoDesc",
+    "comment6882": "-------- % Caution: field names can not start with a number",
+
+    "comment6883": "-------- % The first level corresponds to the exact column name in phenotypes.csv:",
+    "comment6884": "-------- % The following columns are mandatory, do not edit them",
+    "participant_id": {
+      "LongName": "Participant identifier",
+      "Description": "Unique participant identifier"
+    },
+    "session": {
+      "LongName": "Measurement session",
+      "Description": "Session at which the measure was done"
+    },
+    "run": {
+      "LongName": "Measurement run",
+      "Description": "Run at which the measure was done"
+    },
+
+    "comment6885": "-------- % Now we do the same for the non mandatory columns in phenotypes.csv",
+    "comment6886": "-------- % You can delete or add the columns you wish provided you keep phenotypes.csv and the description here consistent",
+    "comment688336": "-------- % Choose clear column names, as they will be used to name the files",
+
+
+    "comment63145": "-------- % Again the column name at the first level",
+    "WAIS": {
+
+      "comment73256": "-------- % The second level contains *Description* and *LongName*:",
+      "Description": "Intelligence scale",
+      "LongName": "Wechsler Adult Intelligence Scale edition IV"
+    },
+
+    "WMS": {
+      "Description": "Memory${defaultBuildTask} scale",
+      "LongName": "Wechsler Memory Scale edition IV"
     }
   }
 }
