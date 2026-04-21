@@ -1,5 +1,6 @@
 This folder provides a template for data collection when planning a conversion of raw EEG, eye-tracking and behavioral data to [BIDS standard](https://bids.neuroimaging.io/) - based on EEGLAB.
 
+
 ### What your folder should contain
 
 ```
@@ -19,7 +20,7 @@ This folder provides a template for data collection when planning a conversion o
 │   └── taskY_eeg/
 ├── stimuli/                 % optional
 ├── deanonymization.csv      % optional
-└── phenotypes.csv           % optional, to save non task related measures like validated scales
+└── phenotypes.csv           % optional, needs to be filled to save non task related measures like validated scales
 ```
 
 ### Steps
@@ -27,8 +28,8 @@ This folder provides a template for data collection when planning a conversion o
 - Plan such that separate data files are generated for each task.
 - Adapt the columns of `participants.csv` to your experiment: only "participant_id" is mandatory, you can record additional participants' informations by creating new columns
 - Optional: adapt the columns of `phenotypes.csv` to your experiment: : only "participant_id", "session" and "run" are mandatory, note that ALL other columns in `phenotypes.csv` should contain file names. Indeed, this file is made to map participants with separated phenotypic data files, not to store information directly. You can track additional participants' phenotypic files by creating new columns. Pick good column names, they will be used to name the files in the destination folder.
-- Create empty folders inside `source_data` - one per task and type of data, named like taskStroop_eeg/
-- Fill in tasks.json file to settle on a clear coding and triggers before data collection starts.
+- Create empty folders inside `source_data` - one per task and type of data, named like *taskStroop_eeg*
+- Fill in `tasks.json` file to settle on a clear coding and triggers before data collection starts.
 
 #### 2. During data collection :
 - Save data files in the appropriate subfolders of `source_data`
