@@ -9,6 +9,7 @@ This folder provides a template for data collection when planning a conversion o
 ├── participants.csv          % needs to be filled
 ├── bids_export_wrapper.m     % main function
 ├── rm_comments_util.m        % utility function
+├── requirements.txt          % list of required libraries
 ├── DEMO.m                    % demonstration of how to run the code
 ├── source_data/
 │   |── phenotype/            % optional, to save non task related measures like validated scales

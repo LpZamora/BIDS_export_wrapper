@@ -1,6 +1,6 @@
 {
   "comment2": "-------- Folder where you want to export the BIDS data",
-  "targetFolder": "BIDS_export_toyset",
+  "targetFolder": "BIDS_TOYSET_DATA",
 
   "comment3": "-------- Does your data contain a 'phenotype' folder that you want to export as well to the BIDS folder (unquoted true/false)",
   "phenotype_folder": true,
