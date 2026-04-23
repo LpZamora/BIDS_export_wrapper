@@ -6,11 +6,11 @@
   "phenotype_folder": true,
 
   "comment000": "-------- Does your data contain a 'stimuli' folder that you want to export as well to the BIDS folder (unquoted true/false)",
-  "stimuli_folder": true,
+  "stimuli_folder": false,
 
 
   "comment4": "-------- % Do you want to copy the source_data to the BIDS folder as well (unquoted true/false)",
-  "copy_sourcedata": true,
+  "copy_sourcedata": false,
 
   "comment5": "________________________________________________ % INFORMATIONS ABOUT participants.csv ",
   "pInfoDesc": {
@@ -177,22 +177,47 @@
       "Description": "Run at which the measure was done"
     },
 
-    "comment6885": "-------- % Now we do the same for the non mandatory columns in phenotypes.csv",
+    "comment6885": "-------- % Now we do the same for the non mandatory columns in phenotypes.csv. Each column should match a phenotypic measure. The linked files are ideally .tsv",
     "comment6886": "-------- % You can delete or add the columns you wish provided you keep phenotypes.csv and the description here consistent",
     "comment688336": "-------- % Choose clear column names, as they will be used to name the files",
 
 
-    "comment63145": "-------- % Again the column name at the first level",
+    "comment88863145": "-------- % Again the column name at the first level",
     "WAIS": {
 
-      "comment73256": "-------- % The second level contains *Description* and *LongName*:",
-      "Description": "Intelligence scale",
-      "LongName": "Wechsler Adult Intelligence Scale edition IV"
-    },
+      "comment73888256": "-------- % The second level contains MeasurementToolMetadata, i.e general informations about that phenotypic scale:",
+        "MeasurementToolMetadata": {
+          "Description": "Wechsler Intelligence Scale, 4th edition",
+          "TermURL": "https://www.cognitiveatlas.org/task/id/trm_5586ff878155d"
+        },
+        "comment73333256": "-------- % Optionnally, you can create at the second level an entry per column in your phenotypic measure",
+        "RAVEN": {
+          "Description": "Score range at the Raven matrix test",
+          "Levels": {
+            "N": "normal",
+            "P": "pathological"
+          }
+        },
+        "IQ": {
+          "Description": "Global Intelligence Quotient"
+          }
+        },
 
+   "comment8863145": "-------- % Next column of phenotypes.csv",
     "WMS": {
-      "Description": "Memory${defaultBuildTask} scale",
-      "LongName": "Wechsler Memory Scale edition IV"
+
+      "comment7388256": "-------- % general informations about that phenotypic scale:",
+        "MeasurementToolMetadata": {
+          "Description": "Wechsler Memory Scale, 3rd edition",
+          "TermURL": "https://www.cognitiveatlas.org/task/id/trm_5586ff878155d"
+        },
+        "comment7333256": "-------- % Optionnally, an entry per column in your phenotypic measure",
+        "FACES1": {
+          "Description": "Score at the Faces immediate memory test"
+        },
+        "FACES2": {
+          "Description": "Score at the Faces delayed memory test"
+          }
+        }
+      }
     }
-  }
-}

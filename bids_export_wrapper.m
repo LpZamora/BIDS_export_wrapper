@@ -227,8 +227,6 @@ function bids_export_wrapper(task, ses)
         cols = all_phe_cols(keep_cols);
 
         % Init structure for json infos
-        pPhenoDesc_clean = struct();
-
         for column = 1:numel(cols)
             col = string(cols(column));
             pheno_rows = ~cellfun(@isempty, pheno_i.(col));
@@ -257,19 +255,18 @@ function bids_export_wrapper(task, ses)
                     warning('Phenotype file %s does not exist', op)
                 end
             end
-            pPhenoDesc_clean.(col) = pPhenoDesc.(col);
+
+            % Add json file with infos
+            json_str = jsonencode(pPhenoDesc.(col), 'PrettyPrint', true);
+            out_json = fullfile(targetFolder, 'phenotype', [char(col) '.json']);
+            fid = fopen(out_json, 'w');
+            if fid == -1
+                error('Cannot open file %s for writing', out_json);
+            end
+            fwrite(fid, json_str, 'char');
+            fclose(fid);
         end
     end
-
-    % Add json file with infos
-    json_str = jsonencode(pPhenoDesc_clean, 'PrettyPrint', true);
-    out_json = fullfile(targetFolder, 'phenotype', 'phenotypes_info.json');
-    fid = fopen(out_json, 'w');
-    if fid == -1
-        error('Cannot open file %s for writing', out_json);
-    end
-    fwrite(fid, json_str, 'char');
-    fclose(fid);
 
     %% copy stimuli and source data folders
     % % -----------------------------------
