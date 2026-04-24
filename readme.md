@@ -1,5 +1,5 @@
-This folder provides a template for data collection when planning a conversion of raw EEG, eye-tracking and behavioral data to [BIDS standard](https://bids.neuroimaging.io/) - based on EEGLAB.
-
+This folder provides a template for systematically collecting and converting raw EEG, eye-tracking and behavioral data to [BIDS standard](https://bids.neuroimaging.io/). Once the non-BIDS data are organized as described below, the bids_export_wrapper function converts the data to BIDS, alleviating the coding/GUI steps usually required.
+The code is based on EEGLAB, see `requirements.txt`.
 
 ### What your folder should contain
 
@@ -46,13 +46,13 @@ Optional:
 
     *Note : The deanonymization csv file isn't used by the bids wrapper script. Its purpose is to support subject's identifier retrieval in longitudinal experiments. It should never be shared.*
 
-#### 3. When a full session has been collected
+#### 3. When a full session has been collected : convert the raw source_data to BIDS
 - First, make a backup of the raw data and metadata
 - For each task (and optionally session), call the bids_export_wrapper function (see DEMO file).
 
     *Note : you can alternatively run it for all sessions at once, but you'll still need to call bids_export_wrapper per task.*
 
-- Use a [BIDS validator](https://bids-standard.github.io/bids-validator/) and make sure you don't get errors.
+- Use a [BIDS validator](https://bids-standard.github.io/bids-validator/) and make sure you don't get many or important errors.
 
-#### 4. Pre-processing the data
+#### 4. Pre-processing the raw BIDS data
 This part is out of the scope of this bids_export wrapper. In general, you would use EEGLAB's pop_importbids() to read the raw BIDS data and, after pre-processing, pop_exportbids() to export the preprocessed data to a BIDS `derivatives` folder.
