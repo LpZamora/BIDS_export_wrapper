@@ -4,6 +4,7 @@ The code is based on EEGLAB, see `requirements.txt`.
 ### What your folder should contain
 
 ```
+├── tutorial.pdf              % slide presentation of BIDS and this export tool
 ├── tasks.json                % needs to be filled
 ├── recordings.csv            % needs to be filled
 ├── participants.csv          % needs to be filled
