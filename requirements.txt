@@ -1,4 +1,4 @@
-GAZEPOINT % for eye-tracking data
+GAZEPOINT % for eye-tracking data. download https://github.com/sccn/gazepoint_eyetracking and add to EEGLAB plugin folder
 
 EEGLAB with plugins:
 - EEG-BIDS

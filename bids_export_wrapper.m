@@ -21,7 +21,7 @@ function bids_export_wrapper(task, ses)
     generalInfo = json.generalInfo;
     README = json.README;
 
-    fieldName = ['task', task];
+    fieldName = ['task_', task];
     tInfo = json.(fieldName).tInfo;
     eInfoDesc = json.(fieldName).eInfoDesc;
 
@@ -29,14 +29,14 @@ function bids_export_wrapper(task, ses)
             'value'         'type' }; 
 
     % Check that source_data folder names, tasks.json fields and task input match
-    pattern = fullfile('source_data', sprintf('task%s_*', task));
+    pattern = fullfile('source_data', sprintf('task_%s_*', task));
     listing = dir(pattern);
     listing = listing([listing.isdir]);
     if numel(listing) < 1
         error('Mismatch between the task input to this function and the folder naming in source_folder.\n')
     end
-    if ~ismember(sprintf("task%s", task),fields(json))
-        error('task%s is not present in the fields of tasks.json', task)
+    if ~ismember(sprintf("task_%s", task),fields(json))
+        error('task-%s is not present in the fields of tasks.json', task)
     end
 
     % Name of the csv containing all recordings and participants infos
@@ -135,11 +135,11 @@ function bids_export_wrapper(task, ses)
     t = t(rows,:);
 
     % Complete files paths - Eye and behavior files are not mandatory
-    t.file_eeg = fullfile('source_data', sprintf('task%s_eeg', task), t.file_eeg);
+    t.file_eeg = fullfile('source_data', sprintf('task_%s_eeg', task), t.file_eeg);
     mask = t.opt_file_behavior ~= "";
-    t.opt_file_behavior(mask) = cellstr(fullfile('source_data', sprintf('task%s_behavior', task), string(t.opt_file_behavior(mask))));
+    t.opt_file_behavior(mask) = cellstr(fullfile('source_data', sprintf('task_%s_behavior', task), string(t.opt_file_behavior(mask))));
     mask = t.opt_file_eye ~= "";
-    t.opt_file_eye(mask) = cellstr(fullfile('source_data', sprintf('task%s_eye', task), string(t.opt_file_eye(mask))));
+    t.opt_file_eye(mask) = cellstr(fullfile('source_data', sprintf('task_%s_eye', task), string(t.opt_file_eye(mask))));
 
 
     %% Build data input object
@@ -184,6 +184,14 @@ function bids_export_wrapper(task, ses)
     behav_rows = ~cellfun(@isempty, t.opt_file_behavior);
     tb = t(behav_rows,:);
 
+    if height(tb) ~= 0
+        if isfield(json.tInfoBehavior, fieldName)
+            beh_json = json.tInfoBehavior.(fieldName);
+        else
+            error('tasks.json lacks tInfoBehavior metadata for %s' , fieldName);
+        end
+    end
+
     for i = 1:height(tb)
         % path in source_data
         op = tb.opt_file_behavior{i};
@@ -196,13 +204,23 @@ function bids_export_wrapper(task, ses)
             % target folder path
             np = fullfile(targetFolder, sprintf('sub-%s', s), sprintf('ses-%d', sss), 'beh');
             % BIDS file name
-            name = sprintf('sub-%s_ses-%d_task-%s_run-%d_beh%s', s, sss, tsk, rn, ext);
+            name = sprintf('sub-%s_ses-%d_task-%s_run-%d_beh', s, sss, tsk, rn);
             % copy the file
             if ~exist(np, 'dir')
                 mkdir(np);
             end
-            fp = fullfile(np, name);
+            fp = fullfile(np, [name ext]);
             copyfile(op, fp);
+
+            % Add json file with infos
+            json_str = jsonencode(beh_json, 'PrettyPrint', true);
+            out_json = fullfile(np, [name '.json']);
+            fid = fopen(out_json, 'w');
+            if fid == -1
+                error('Cannot open file %s for writing', out_json);
+            end
+            fwrite(fid, json_str, 'char');
+            fclose(fid);
         else
             warning('Behavioral file %s does not exist', op)
         end

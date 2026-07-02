@@ -13,13 +13,13 @@ The code is based on EEGLAB, see `requirements.txt`.
 ├── requirements.txt          % list of required libraries
 ├── DEMO.m                    % demonstration of how to run the code
 ├── source_data/
-│   |── phenotype/            % optional, to save non task related measures like validated scales
-│   ├── taskX_behavior/       % only eeg folders are mandatory. Folder names should be "task*_*type*"
-│   ├── taskX_eeg/
-│   ├── taskX_eye/
-│   ├── taskY_behavior/
-│   ├── taskY_eye/
-│   └── taskY_eeg/
+│   ├── task_X_behavior/      % Folder names should be "task_..._*type*", where type = behavior or eeg or eye
+│   ├── task_X_eeg/           % only eeg folders are mandatory.
+│   ├── task_X_eye/
+│   ├── task_Y_behavior/
+│   ├── task_Y_eye/
+│   |── task_Y_eeg/
+│   └── phenotype/           % optional, to save non task related measures like validated scales
 ├── stimuli/                 % optional
 ├── deanonymization.csv      % optional
 └── phenotypes.csv           % optional, needs to be filled to save non task related measures like validated scales

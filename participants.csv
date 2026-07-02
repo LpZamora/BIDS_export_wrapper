@@ -1,4 +1,4 @@
-participant_id;sex;age;handedness;group;corrected_vision
-10310;F;22.5;R;c;N
-10311;M;52.5;L;c;Y
-10314;M;27.5;R;p;N
+participant_id	age	sex	hand
+74	18	f	r
+75	25	f	r
+96	22	f	r

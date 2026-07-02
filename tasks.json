@@ -1,12 +1,12 @@
 {
   "comment2": "-------- Folder where you want to export the BIDS data",
-  "targetFolder": "BIDS_TOYSET_DATA",
+  "targetFolder": "BIDS_output",
 
   "comment3": "-------- Does your data contain a 'phenotype' folder that you want to export as well to the BIDS folder (unquoted true/false)",
   "phenotype_folder": true,
 
   "comment000": "-------- Does your data contain a 'stimuli' folder that you want to export as well to the BIDS folder (unquoted true/false)",
-  "stimuli_folder": false,
+  "stimuli_folder": true,
 
 
   "comment4": "-------- % Do you want to copy the source_data to the BIDS folder as well (unquoted true/false)",
@@ -34,16 +34,8 @@
       "Description": "Biological sex of the participant",
       "Levels": {
         "comment8": "-------- % *Levels* should contain fields named after each modality in the column. E.g here the sub_sex column from participants.csv contains two modalities *M* and *F*",
-        "M": "male",
-        "F": "female"
-      }
-    },
-
-    "group": {
-      "Description": "Experimental group of the participant",
-      "Levels": {
-        "c": "control group",
-        "p": "clinical group"
+        "m": "male",
+        "f": "female"
       }
     },
 
@@ -52,57 +44,53 @@
       "Units": "years"
     },
 
-    "handedness": {
+    "hand": {
       "Description": "Manual laterality of the participant",
       "Levels": {
-        "R": "right-handed",
-        "L": "left-handed",
-        "A": "ambidextrous"
-      }
-    },
-
-   "corrected_vision": {
-      "Description": "Vision of the participant",
-      "Levels": {
-        "N": "normal vision without correction",
-        "Y": "normal vision with correction"
+        "r": "right-handed",
+        "l": "left-handed",
+        "a": "ambidextrous"
       }
     }
   },
 
-
   "comment9": "_______________________________________________ % GENERAL INFORMATIONS ABOUT THE DATASET",
   "generalInfo": {
-    "Name": "Toyset",
-    "ReferencesAndLinks": ["No bibliographic reference other than the DOI for this dataset"],
-    "BIDSVersion": "v1.2.1",
-    "License": "",
+    "Name": "EEG, pupillometry, ECG and photoplethysmography, and behavioral data in the digit span task and rest",
+    "ReferencesAndLinks": [
+      "Pavlov, Y. G., Kasanov, D., Kosachenko, A. I., Kotyusov, A. I., & Busch, N. A. (2022). Pupillometry and electroencephalography in the digit span task. Scientific Data, 9(1), 325. https://doi.org/10.1038/s41597-022-01414-2",
+      "Pavlov, Y. G., Gashkova, A. S., Kasanov, D., Kosachenko, A. I., Kotyusov, A. I., & Kotchoubey, B. (2023). Task-evoked pulse wave amplitude tracks cognitive load. Scientific Reports, 13(1), 1–10. https://doi.org/10.1038/s41598-023-48917-5",
+      "Kosachenko, A. I., Kasanov, D., Kotyusov, A. I., & Pavlov, Y. G. (2023). EEG and pupillometric signatures of working memory overload. Psychophysiology, n/a(n/a), e14275. https://doi.org/10.1111/psyp.14275"],
+    "BIDSVersion": "",
+    "License": "CC0",
     "Authors": [
-      "Marge",
-      "Lisa"
+      "Yuri G. Pavlov",
+      "Dauren Kasanov",
+      "Alexandra I. Kosachenko",
+      "Alexander I. Kotyusov"
     ]
   },
-  "README": "Toyset\n\nThis dataset...description of the experimental design",
+
+  "README":
+  "This is a subsample of https://doi.org/10.1038/s41597-022-01414-2, adapted for the sole purpose of demonstration of PND's BIDS wrapper tool.",
 
 
-  "comment90": "______________________________________________ % TASK SPECIFIC INFORMATIONS",
+  "comment90": "______________________________________________ % EEG TASK SPECIFIC INFORMATIONS",
 
   "comment91": "-------- % The first level is composed of a field per task in your data",
-  "comment92": "-------- % It should be named *task+name-of-the-task*, e.g taskEC",
-  "taskEC": {
-
+  "comment92": "-------- % It should be named *task_name-of-the-task*, e.g task_EC",
+  "task_rest": {
     "tInfo": {
-      "comment93": "-------- % PowerLineFrequency expects unquoted integers (Hz)",
       "PowerLineFrequency": 50,
-      "TaskName":"EC",
+      "TaskName":"rest",
       "CapManufacturer": "n/a",
       "RecordingType": "continuous",
-      "ManufacturersModelName": "n/a",
+      "ManufacturersModelName": "Brain Products actiCHamp",
       "SoftwareFilters": "n/a",
       "Instructions": "n/a",
       "InstitutionAddress": "n/a",
-      "InstitutionName": "n/a",
-      "InstitutionalDepartmentName": "n/a"
+      "InstitutionName": "Ural Federal University",
+      "InstitutionalDepartmentName": "Department of Psychology"
     },
 
     "eInfoDesc": {
@@ -110,33 +98,28 @@
         "Description": "Event onset",
         "Units": "second"
       },
-
-      "comment94": "-------- % Now we describe all EEG triggers",
       "value": {
         "Description": "Trigger codes from EEG system",
         "Levels": {
-          "comment95": "-------- % Create a field per EEG trigger. It should be named *x+trigger value*. E.g if the triggers are 32766,4,3",
-          "x32766": "Start of recording",
-          "x4": "Start of block",
-          "x3": "An interesting event"
+          "eyes opened": "start of resting state with eyes opened?"
         }
       }
     }
   },
 
   "comment95": "-------- % Now repeat for all other tasks. In our example there is only one more task, eyes open resting state (EO)",
-  "taskEO": {
+  "task_memory": {
     "tInfo": {
       "PowerLineFrequency": 50,
-      "TaskName":"EO",
+      "TaskName":"memory",
       "CapManufacturer": "n/a",
       "RecordingType": "continuous",
-      "ManufacturersModelName": "n/a",
+      "ManufacturersModelName": "Brain Products actiCHamp",
       "SoftwareFilters": "n/a",
       "Instructions": "n/a",
       "InstitutionAddress": "n/a",
-      "InstitutionName": "n/a",
-      "InstitutionalDepartmentName": "n/a"
+      "InstitutionName": "Ural Federal University",
+      "InstitutionalDepartmentName": "Department of Psychology"
     },
     
     "eInfoDesc": {
@@ -147,10 +130,128 @@
       "value": {
         "Description": "Trigger codes from EEG system",
         "Levels": {
-          "x32766": "Start of recording",
-          "x4": "Start of block",
-          "x3": "An interesting event"
+          "x500105": "control 01/05: listen to digit 1 (first) in 5 digit sequence",
+          "x500205": "control 02/05: listen to digit 2 in 5 digit sequence",
+          "x500305": "control 03/05: listen to digit 3 in 5 digit sequence",
+          "x500405": "control 04/05: listen to digit 4 in 5 digit sequence",
+          "x500505": "control 05/05: listen to digit 5 (last) in 5 digit sequence",
+          "x500109": "control 01/09: listen to digit 1 (first) in 9 digit sequence",
+          "x500209": "control 02/09: listen to digit 2 in 9 digit sequence",
+          "x500309": "control 03/09: listen to digit 3 in 9 digit sequence",
+          "x500409": "control 04/09: listen to digit 4 in 9 digit sequence",
+          "x500509": "control 05/09: listen to digit 5 in 9 digit sequence",
+          "x500609": "control 06/09: listen to digit 6 in 9 digit sequence",
+          "x500709": "control 07/09: listen to digit 7 in 9 digit sequence",
+          "x500809": "control 08/09: listen to digit 8 in 9 digit sequence",
+          "x500909": "control 09/09: listen to digit 9 (last) in 9 digit sequence",
+          "x500113": "control 01/13: listen to digit 1 (first) in 13 digit sequence",
+          "x500213": "control 02/13: listen to digit 2 in 13 digit sequence",
+          "x500313": "control 03/13: listen to digit 3 in 13 digit sequence",
+          "x500413": "control 04/13: listen to digit 4 in 13 digit sequence",
+          "x500513": "control 05/13: listen to digit 5 in 13 digit sequence",
+          "x500613": "control 06/13: listen to digit 6 in 13 digit sequence",
+          "x500713": "control 07/13: listen to digit 7 in 13 digit sequence",
+          "x500813": "control 08/13: listen to digit 8 in 13 digit sequence",
+          "x500913": "control 09/13: listen to digit 9 in 13 digit sequence",
+          "x501013": "control 10/13: listen to digit 10 in 13 digit sequence",
+          "x501113": "control 11/13: listen to digit 11 in 13 digit sequence",
+          "x501213": "control 12/13: listen to digit 12 in 13 digit sequence",
+          "x501313": "control 13/13: listen to digit 13 (last) in 13 digit sequence",
+          "x6001050": "memory 01/05 error: memorize digit 1 (first) in 5 digit sequence; forgotten",
+          "x6001051": "memory 01/05 correct: memorize digit 1 (first) in 5 digit sequence; correctly recalled",
+          "x6002050": "memory 02/05 error: memorize digit 2 in 5 digit sequence; forgotten",
+          "x6002051": "memory 02/05 correct: memorize digit 2 in 5 digit sequence; correctly recalled",
+          "x6003050": "memory 03/05 error: memorize digit 3 in 5 digit sequence; forgotten",
+          "x6003051": "memory 03/05 correct: memorize digit 3 in 5 digit sequence; correctly recalled",
+          "x6004050": "memory 04/05 error: memorize digit 4 in 5 digit sequence; forgotten",
+          "x6004051": "memory 04/05 correct: memorize digit 4 in 5 digit sequence; correctly recalled",
+          "x6005050": "memory 05/05 error: memorize digit 5 (last) in 5 digit sequence; forgotten",
+          "x6005051": "memory 05/05 correct: memorize digit 5 (last) in 5 digit sequence; correctly recalled",
+          "x6001090": "memory 01/09 error: memorize digit 1 (first) in 9 digit sequence; forgotten",
+          "x6001091": "memory 01/09 correct: memorize digit 1 (first) in 9 digit sequence; correctly recalled",
+          "x6002090": "memory 02/09 error: memorize digit 2 in 9 digit sequence; forgotten",
+          "x6002091": "memory 02/09 correct: memorize digit 2 in 9 digit sequence; correctly recalled",
+          "x6003090": "memory 03/09 error: memorize digit 3 in 9 digit sequence; forgotten",
+          "x6003091": "memory 03/09 correct: memorize digit 3 in 9 digit sequence; correctly recalled",
+          "x6004090": "memory 04/09 error: memorize digit 4 in 9 digit sequence; forgotten",
+          "x6004091": "memory 04/09 correct: memorize digit 4 in 9 digit sequence; correctly recalled",
+          "x6005090": "memory 05/09 error: memorize digit 5 in 9 digit sequence; forgotten",
+          "x6005091": "memory 05/09 correct: memorize digit 5 in 9 digit sequence; correctly recalled",
+          "x6006090": "memory 06/09 error: memorize digit 6 in 9 digit sequence; forgotten",
+          "x6006091": "memory 06/09 correct: memorize digit 6 in 9 digit sequence; correctly recalled",
+          "x6007090": "memory 07/09 error: memorize digit 7 in 9 digit sequence; forgotten",
+          "x6007091": "memory 07/09 correct: memorize digit 7 in 9 digit sequence; correctly recalled",
+          "x6008090": "memory 08/09 error: memorize digit 8 in 9 digit sequence; forgotten",
+          "x6008091": "memory 08/09 correct: memorize digit 8 in 9 digit sequence; correctly recalled",
+          "x6009090": "memory 09/09 error: memorize digit 9 (last) in 9 digit sequence; forgotten",
+          "x6009091": "memory 09/09 correct: memorize digit 9 (last) in 9 digit sequence; correctly recalled",
+          "x6001130": "memory 01/13 error: memorize digit 1 (first) in 13 digit sequence; forgotten",
+          "x6001131": "memory 01/13 correct: memorize digit 1 (first) in 13 digit sequence; correctly recalled",
+          "x6002130": "memory 02/13 error: memorize digit 2 in 13 digit sequence; forgotten",
+          "x6002131": "memory 02/13 correct: memorize digit 2 in 13 digit sequence; correctly recalled",
+          "x6003130": "memory 03/13 error: memorize digit 3 in 13 digit sequence; forgotten",
+          "x6003131": "memory 03/13 correct: memorize digit 3 in 13 digit sequence; correctly recalled",
+          "x6004130": "memory 04/13 error: memorize digit 4 in 13 digit sequence; forgotten",
+          "x6004131": "memory 04/13 correct: memorize digit 4 in 13 digit sequence; correctly recalled",
+          "x6005130": "memory 05/13 error: memorize digit 5 in 13 digit sequence; forgotten",
+          "x6005131": "memory 05/13 correct: memorize digit 5 in 13 digit sequence; correctly recalled",
+          "x6006130": "memory 06/13 error: memorize digit 6 in 13 digit sequence; forgotten",
+          "x6006131": "memory 06/13 correct: memorize digit 6 in 13 digit sequence; correctly recalled",
+          "x6007130": "memory 07/13 error: memorize digit 7 in 13 digit sequence; forgotten",
+          "x6007131": "memory 07/13 correct: memorize digit 7 in 13 digit sequence; correctly recalled",
+          "x6008130": "memory 08/13 error: memorize digit 8 in 13 digit sequence; forgotten",
+          "x6008131": "memory 08/13 correct: memorize digit 8 in 13 digit sequence; correctly recalled",
+          "x6009130": "memory 09/13 error: memorize digit 9 in 13 digit sequence; forgotten",
+          "x6009131": "memory 09/13 correct: memorize digit 9 in 13 digit sequence; correctly recalled",
+          "x6010130": "memory 10/13 error: memorize digit 10 in 13 digit sequence; forgotten",
+          "x6010131": "memory 10/13 correct: memorize digit 10 in 13 digit sequence; correctly recalled",
+          "x6011130": "memory 11/13 error: memorize digit 11 in 13 digit sequence; forgotten",
+          "x6011131": "memory 11/13 correct: memorize digit 11 in 13 digit sequence; correctly recalled",
+          "x6012130": "memory 12/13 error: memorize digit 12 in 13 digit sequence; forgotten",
+          "x6012131": "memory 12/13 correct: memorize digit 12 in 13 digit sequence; correctly recalled",
+          "x6013130": "memory 13/13 error: memorize digit 13 (last) in 13 digit sequence; forgotten",
+          "x6013131": "memory 13/13 correct: memorize digit 13 (last) in 13 digit sequence; correctly recalled"
         }
+      }
+    }
+  },
+
+
+"comment905444": "______________________________________________ % OPTIONAL: BEHAVIOR TASK SPECIFIC INFORMATIONS",
+
+"tInfoBehavior": {
+
+    "comment688661": "-------- % Add one entry per task that also comes with behavioral data of type _beh.tsv",
+    "task_memory": {
+
+      "comment688688861": "-------- % For each task, describe all the columns present in the _beh.tsv like file",
+
+      "participant_id": {
+          "Description": "unique participant identifier"
+        },
+      "task": {
+          "Description": "memorizing or listening task. only memory task trials are included here"
+        },
+      "condition": {
+          "Description": "number of digits to memorize in the sequence"
+        },
+      "trial": {
+          "Description": "serial number of trial"
+        },
+      "sequence": {
+          "Description": "sequence of digits presented this trial"
+        },
+      "response": {
+          "Description": "participant's response"
+        },
+      "NCorrect": {
+          "Description": "number of correctly recalled digits in correct order starting from the first digit"
+        },
+      "partialScore": {
+          "Description": "number of correctly recalled digits in correct serial positions"
+        },
+      "triggerCorrect": {
+          "Description": "correctness flags for each presented digit: 0 - error, 1 - correct recall"
       }
     }
   },
@@ -221,3 +322,4 @@
         }
       }
     }
+

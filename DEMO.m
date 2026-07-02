@@ -5,13 +5,13 @@
 pwd
 
 % Define the session(s) that you want to export
-% When all the sessions are already collected, call the function on all the sessions:
-ses = [1,2]; 
+% When all the sessions are already collected, call the function on all the sessions, eg: ses = [1,2]; 
+ses = [1]; 
 
 %% However, a dedicated call must be made for each task in the data
-% For example, there are two tasks in the provided toyset, EC and EO.
-task1 = 'EC';
-task2 = 'EO';
+% For example, there are two tasks in the provided toysetcd.
+task1 = 'rest';
+task2 = 'memory';
 
 bids_export_wrapper(task1, ses)
 bids_export_wrapper(task2, ses)
