@@ -28,6 +28,7 @@ The code is based on EEGLAB, see `requirements.txt`.
 ### Steps
 #### 1. Study Design
 - Plan such that separate data files are generated for each task.
+- If you plan on saving behavioral data in dedicated files, use .tsv format
 - Adapt the columns of `participants.csv` to your experiment: only "participant_id" is mandatory, you can record additional participants' informations by creating new columns
 - Optional: adapt the columns of `phenotypes.csv` to your experiment: : only "participant_id", "session" and "run" are mandatory, note that ALL other columns in `phenotypes.csv` should contain file names. Indeed, this file is made to map participants with separated phenotypic data files, not to store information directly. You can track additional participants' phenotypic files by creating new columns. Pick good column names, they will be used to name the files in the destination folder.
 - Create empty folders inside `source_data` - one per task and type of data, named like *taskStroop_eeg*
