@@ -1,7 +1,7 @@
 participant_id;task;session;run;file_eeg;opt_file_behavior;opt_file_eye;opt_notes
-74;memory;1;1;74.set;74.tsv;74.tsv;test note 1
-75;memory;1;1;75.set;75.tsv;75.tsv;test note 2
-96;memory;1;1;96.set;96.tsv;96.tsv;test note 3
+74;memory;1;1;74.set;74.tsv;74_small.tsv;inversed response mapping
+75;memory;1;1;75.set;75.tsv;75_small.tsv;
+96;memory;1;1;96.set;96.tsv;96_small.tsv;something useful
 74;rest;1;1;74.set;;;
 75;rest;1;1;75.set;;;
 96;rest;1;1;96.set;;;

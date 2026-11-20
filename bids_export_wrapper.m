@@ -44,14 +44,28 @@ function bids_export_wrapper(task, ses)
     sub_csv = 'participants.csv';
 
     % Read infos
-    opts = detectImportOptions(recordings_csv);
+    opts = detectImportOptions(recordings_csv); %let matlab guess delimiter
+    if ~ismember('participant_id', opts.VariableNames)
+        % if no participant_id detected try forcing csv format
+        opts = detectImportOptions(recordings_csv, 'Delimiter', ',');
+        if ~ismember('participant_id', opts.VariableNames)
+            error('Failed to parse "%s" as a comma-delimited CSV.', recordings_csv);
+        end
+    end
+    
     opts = setvartype(opts, 'participant_id', 'string');
     recs_i = readtable(recordings_csv, opts);
 
-    opts = detectImportOptions(sub_csv);
+    opts = detectImportOptions(sub_csv); %let matlab guess delimiter
+    if ~ismember('participant_id', opts.VariableNames)
+        % if no participant_id detected try forcing csv format
+        opts = detectImportOptions(sub_csv, 'Delimiter', ',');
+        if ~ismember('participant_id', opts.VariableNames)
+            error('Failed to parse "%s" as a comma-delimited CSV.', sub_csv);
+        end
+    end
     opts = setvartype(opts, 'participant_id', 'string');
     subs_i = readtable(sub_csv, opts);
-
     infos = innerjoin(recs_i, subs_i, 'Keys', 'participant_id');
 
     % Convert columns session and run to double, and others to string
@@ -151,7 +165,7 @@ function bids_export_wrapper(task, ses)
         ts = t(string(t.participant_id) == string(s), :);
 
         data(i).file = cellstr(ts.file_eeg);
-        %data(i).eyefile = cellstr(ts.opt_file_eye);
+        data(i).eyefile = cellstr(ts.opt_file_eye);
         data(i).session = ts.session;
         data(i).run     = ts.run;
         data(i).task = cellstr(ts.task);
